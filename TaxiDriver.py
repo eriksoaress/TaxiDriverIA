@@ -1,8 +1,3 @@
-import copy
-from aigyminsper.search.SearchAlgorithms import BuscaProfundidadeIterativa
-from aigyminsper.search.SearchAlgorithms import BuscaCustoUniforme
-from aigyminsper.search.SearchAlgorithms import BuscaGananciosa
-from aigyminsper.search.SearchAlgorithms import BuscaLargura
 from aigyminsper.search.SearchAlgorithms import AEstrela
 from aigyminsper.search.Graph import State
 
@@ -87,11 +82,12 @@ class Taxi(State):
             return 1
 
 def main():
-    state = Taxi("", [7,5], [3,5], [[0,3],[1,3],[2,3]], [3,5], [4,0], True)
+    state = Taxi("", [7,5], [0,0], [[0,3],[1,3],[2,3]], [0,5], [4,0])
     algorithm = AEstrela()
     result = algorithm.search(state, trace=True)
     if result != None:
         print(result.show_path())
+        print(result.g)
     else:
         print('Nao achou solucao')
     return result
