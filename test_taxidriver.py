@@ -32,3 +32,12 @@ def test_dificil2():
     fim = datetime.now()
     print(fim - inicio)
     assert r.g == 30
+
+def test_dificil3():  
+    inicio = datetime.now()
+    state = Taxi("", [8,8], [6,0], [[8,1],[7,1],[6,1],[5,1],[4,1],[3,1],[2,3],[1,3],[0,3],[8,5],[7,5],[6,5],[5,5],[4,5],[3,5],[2,7],[1,7],[0,7]], [7,4], [7,6])
+    r = state.show_path()
+    fim = datetime.now()
+    print(fim - inicio)
+    assert r.g == 35
+
