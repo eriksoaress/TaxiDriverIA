@@ -14,27 +14,27 @@ class Taxi(State):
     
     def sucessors(self):
         sucessors = []
-        if self.taxi[0] != 0 and [self.taxi[0]-1,self.taxi[1]] not in self.obstaculos:
+        if self.taxi[0] > 0 and [self.taxi[0]-1,self.taxi[1]] not in self.obstaculos:
             if self.carro_com_passageiro == False:
                 sucessors.append(Taxi("cima", self.mapa_dimensao,[self.taxi[0]-1, self.taxi[1]], self.obstaculos, self.passageiro, self.destino, self.carro_com_passageiro))
             else:
                 sucessors.append(Taxi("cima", self.mapa_dimensao,[self.taxi[0]-1, self.taxi[1]], self.obstaculos, [self.taxi[0]-1, self.taxi[1]], self.destino, self.carro_com_passageiro))
 
 
-        if self.taxi[0] != self.mapa_dimensao[0] and [self.taxi[0]+1,self.taxi[1]] not in self.obstaculos:
+        if self.taxi[0] < self.mapa_dimensao[0]-1 and [self.taxi[0]+1,self.taxi[1]] not in self.obstaculos:
             if self.carro_com_passageiro == False:
                 sucessors.append(Taxi("baixo", self.mapa_dimensao,[self.taxi[0]+1, self.taxi[1]], self.obstaculos, self.passageiro, self.destino, self.carro_com_passageiro))
             else:
                 sucessors.append(Taxi("baixo", self.mapa_dimensao,[self.taxi[0]+1, self.taxi[1]], self.obstaculos, [self.taxi[0]+1, self.taxi[1]], self.destino, self.carro_com_passageiro))
 
 
-        if self.taxi[1] != 0 and [self.taxi[0],self.taxi[1]-1] not in self.obstaculos:
+        if self.taxi[1] > 0 and [self.taxi[0],self.taxi[1]-1] not in self.obstaculos:
             if self.carro_com_passageiro == False:
                 sucessors.append(Taxi("esquerda", self.mapa_dimensao,[self.taxi[0], self.taxi[1]-1], self.obstaculos, self.passageiro, self.destino, self.carro_com_passageiro))
             else:
                 sucessors.append(Taxi("esquerda", self.mapa_dimensao,[self.taxi[0], self.taxi[1]-1], self.obstaculos, [self.taxi[0], self.taxi[1]-1], self.destino, self.carro_com_passageiro))
 
-        if self.taxi[1] != self.mapa_dimensao[1] and [self.taxi[0],self.taxi[1]+1] not in self.obstaculos:
+        if self.taxi[1] < self.mapa_dimensao[1]-1 and [self.taxi[0],self.taxi[1]+1] not in self.obstaculos:
             if self.carro_com_passageiro == False:
                 sucessors.append(Taxi("direita", self.mapa_dimensao,[self.taxi[0], self.taxi[1]+1], self.obstaculos, self.passageiro, self.destino, self.carro_com_passageiro))
             else:
@@ -63,17 +63,19 @@ class Taxi(State):
         return soma
 
 
-    def show_path(self, op, mapa_dimensao, taxi, obstaculos, passageiro, destino):
-        state = Taxi(self, op, mapa_dimensao, taxi, obstaculos, passageiro, destino)
+    def show_path(self):
+        state = Taxi(self.operator, self.mapa_dimensao, self.taxi, self.obstaculos, self.passageiro, self.destino, self.carro_com_passageiro)
         algorithm = AEstrela()
-        result = algorithm.search(state)
+        result = algorithm.search(state, trace=True)
         if result != None:
-            return result.show_path()
+            print(result.show_path())
+            print(result.g)
         else:
-            return 'Nao tem solucao'
+            print('Nao achou solucao')
+        return result
     
     def env(self):
-        return self.operator + str(self.taxi) + str(self.carro_com_passageiro)
+        return str(self.operator) + str(self.taxi) + str(self.carro_com_passageiro) + str(self.passageiro)
     
     def cost(self):
         if "passageiro" in self.operator:
@@ -82,7 +84,7 @@ class Taxi(State):
             return 1
 
 def main():
-    state = Taxi("", [7,5], [0,0], [[0,3],[1,3],[2,3]], [0,5], [4,0])
+    state = Taxi("", [5,7], [0,0], [[0,3],[1,3],[2,3],[2,4],[2,5],[3,1],[4,1]], [0,4], [4,0])
     algorithm = AEstrela()
     result = algorithm.search(state, trace=True)
     if result != None:
