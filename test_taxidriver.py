@@ -41,3 +41,10 @@ def test_dificil3():
     print(fim - inicio)
     assert r.g == 35
 
+def test_impossivel():
+    inicio = datetime.now()
+    state = Taxi("", [2,2], [0,0], [[0,1],[1,0]], [1,1], [0,0])
+    r = state.show_path()
+    fim = datetime.now()
+    print(fim-inicio)
+    assert r == None

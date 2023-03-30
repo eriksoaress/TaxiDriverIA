@@ -84,7 +84,7 @@ class Taxi(State):
             return 1
 
 def main():
-    state = Taxi("", [5,7], [0,0], [[0,3],[1,3],[2,3],[2,4],[2,5],[3,1],[4,1]], [0,4], [4,0])
+    state = Taxi("", [2,2], [0,0], [[0,1],[1,0]], [1,1], [0,0])
     algorithm = AEstrela()
     result = algorithm.search(state, trace=True)
     if result != None:
@@ -92,6 +92,7 @@ def main():
         print(result.g)
     else:
         print('Nao achou solucao')
+        return 'Nao achou solucao'
     return result
 
 if __name__ == '__main__':
