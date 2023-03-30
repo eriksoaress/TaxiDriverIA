@@ -37,7 +37,23 @@ Mostre como ficam representados os estados inicial e final segundo a representa�
 
 
 
-Quais as operações sobre os estados? (detalhe como cada operação irá alterar os estados e quais as condições para cada operação ser executada)
+Quais as operações sobre os estados? (detalhe como cada operação irá alterar os estados e quais as condições para cada operação ser executada)\
+\
+Operações:\
+- "cima" - move o taxi uma linha para cima no mapa. (EXEMPLO taxi:[1,1] -> taxi:[0,1])
+
+- "baixo" - move o taxi uma linha para baixo no mapa. (EXEMPLO taxi:[1,1] -> taxi:[2,1])
+
+- "esquerda" - move o taxi uma coluna para a esquerda no mapa. (EXEMPLO taxi:[1,1] -> taxi:[1,0])
+
+- "direita" - move o taxi uma coluna para a direita no mapa. (EXEMPLO taxi:[1,1] -> taxi:[1,2])
+
+- "pegar passageiro" - altera o valor do parâmetro "carro_com_passageiro" para True. (EXEMPLO carro_com_passageiro: False -> carro_com_passageiro: True)
+
+- "deixar passageiro" - altera o valor do parâmetro "carro_com_passageiro" para False. (EXEMPLO carro_com_passageiro: True -> carro_com_passageiro: False)
+
+
+
 As operações possíveis são "cima", "direita", "baixo", "esquerda" que movimentam o taxi alterando os valores da sua coordenada de acordo com a operação. Também há as operações "pegar passageiro" que altera o valor de "carro_com_passageiro" para True e a "deixar passageiro" altera o valor de "carro_com_passageiro" para False
 
 
@@ -46,7 +62,7 @@ Que algoritmo de busca foi utilizado para resolver este problema considerando qu
 
 
 A equipe fez uso de heurísticas? Se sim, explique as heurísticas utilizadas.
-
+Sim, a heurística utilizada foi distância de Manhattan entre o taxi e o passageiro, e após pegar o passageiro foi calculada a distância de Manhattan entre o taxi e o destino final.
 
 Quais são os limites da solução? A solução consegue tratar mapas com que dimensões? Quão complexo pode ser a estrutura de obstáculos?
 
