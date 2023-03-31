@@ -59,10 +59,11 @@ Que algoritmo de busca foi utilizado para resolver este problema considerando qu
 
 
 A equipe fez uso de heurísticas? Se sim, explique as heurísticas utilizadas.
-Sim, a heurística utilizada foi distância de Manhattan entre o taxi e o passageiro, e após pegar o passageiro foi calculada a distância de Manhattan entre o taxi e o destino final. Foi utilizada essa heurística porque ela simula a distância entre o ponto atual e o de destino e também considerando a forma com que o taxi se movimenta (vertical e horizontal).
+- Sim, a heurística utilizada foi distância de Manhattan entre o taxi e o passageiro, e após pegar o passageiro foi calculada a distância de Manhattan entre o taxi e o destino final. Foi utilizada essa heurística porque ela simula a distância entre o ponto atual e o de destino e também considerando a forma com que o taxi se movimenta (vertical e horizontal).
+
 
 Quais são os limites da solução? A solução consegue tratar mapas com que dimensões? Quão complexo pode ser a estrutura de obstáculos?
-
+- O tempo de execução do algoritmo pode variar para cada máquina que está executando, a depender de seu processador. Testamos a solução para mapas sem obstáculos e pegando o pior cenário possível (nesse caso o taxi e o destino estariam em um vértice do mapa enquanto que o passageiro estaria no vértice oposto), dessa forma executando para um mapa de dimensão 15 por 15 a execução levou cerca de 5 minutos. Os obstáculos não foram considerados nesses testes pois eles não influenciam no desempenho, podendo então apresentar qualquer complexidade, o único impacto será em relação a ter ou não uma solução possível.
 
 
 Uma explicação de como deve ser usada a implementação com exemplos.

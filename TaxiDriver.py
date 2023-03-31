@@ -99,7 +99,7 @@ class Taxi(State):
 
 def main():
     dimensao, taxi, obstaculos, passageiro, destino = cria_exemplo(15 )
-    state = Taxi("", dimensao, [0,0], [], [0,dimensao[0]-1], [dimensao[0]-1,0])
+    state = Taxi("", dimensao, [0,0], [], [dimensao[0]-1,dimensao[0]-1], [0,0])
     algorithm = AEstrela()
     result = algorithm.search(state, trace=True)
     if result == None:
