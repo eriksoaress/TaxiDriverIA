@@ -10,9 +10,8 @@ BLACK = (0, 0, 0)
 
 
 CELL_SIZE = 50
-NUM_COLS = 10
-NUM_ROWS = 10
-
+NUM_COLS = int(input('DIgite o numero de colunas desejadas :'))
+NUM_ROWS = int(input('DIgite o numero de linhas desejadas :'))
 
 board = np.zeros((NUM_ROWS, NUM_COLS))
 
@@ -36,7 +35,6 @@ while True:
         elif event.type == pygame.MOUSEBUTTONDOWN:
             # Obtém a posição do clique do mouse
             x, y = event.pos
-            
             # Calcula a posição do quadrado clicado
             col = x // CELL_SIZE
             row = y // CELL_SIZE
@@ -59,5 +57,9 @@ while True:
         pygame.draw.line(screen, color=BLACK, start_pos=(0, WINDOW_SIZE[1]//NUM_ROWS*i), end_pos= (WINDOW_SIZE[0], WINDOW_SIZE[1]//NUM_ROWS*i))
     # Atualiza a tela
     pygame.display.update()
+
+
+
+
 
 
