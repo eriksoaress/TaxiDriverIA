@@ -88,6 +88,7 @@ while teste:
 
     # Atualiza a tela
     pygame.display.update()
+    print(board)
 
 
 
