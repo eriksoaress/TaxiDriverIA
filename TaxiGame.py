@@ -51,3 +51,34 @@ while FASE == 0:
     # Atualiza a tela
     pygame.display.update()
 
+# ROdar taxi driver devolve o path
+
+path = ''
+n = 0
+boards = gerar_boards(path,board)
+while FASE == 1:
+    if window == 'animacao':
+        board,n = animacao(boards, n)
+
+
+     # Desenha o tabuleiro na tela
+    for row in range(NUM_ROWS):
+        for col in range(NUM_COLS):
+            if board[row][col] == 1:
+                pygame.draw.rect(screen, BLUE, (col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE))
+            elif board[row][col] == 2:
+                pygame.draw.rect(screen, YELLOW, (col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE))
+            elif board[row][col] == 3:
+                pygame.draw.rect(screen, CIANO, (col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE))
+            elif board[row][col] == 5:
+                pygame.draw.rect(screen, GREEN, (col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE))
+            else:
+                pygame.draw.rect(screen, WHITE, (col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE))             
+
+    for i in range(1,NUM_COLS):
+        pygame.draw.line(screen, color=BLACK, start_pos=(WINDOW_SIZE[0]//NUM_COLS*i,0), end_pos= (WINDOW_SIZE[0]//NUM_COLS*i,WINDOW_SIZE[1]))
+    for i in range(1,NUM_ROWS):
+        pygame.draw.line(screen, color=BLACK, start_pos=(0, WINDOW_SIZE[1]//NUM_ROWS*i), end_pos= (WINDOW_SIZE[0], WINDOW_SIZE[1]//NUM_ROWS*i))
+    # Atualiza a tela
+    pygame.display.update()
+

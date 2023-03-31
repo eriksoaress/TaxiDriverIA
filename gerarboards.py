@@ -56,3 +56,4 @@ path = "; esquerda ; baixo ; cima ; direita"
 board = np.array([[ 0, 0, 0],[0, 1, 0],[0, 0,0,]])
 
 print (gerar_boards(path, board))
+      
