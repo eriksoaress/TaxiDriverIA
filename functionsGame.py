@@ -93,7 +93,7 @@ def passageiro(board,window):
                 board[row][col] = 3
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RETURN:
-                window = 'obstaculos'
+                window = 'objetivo'
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_BACKSPACE:
                 window = 'taxi'
@@ -119,5 +119,9 @@ def objetivo(board, window):
                 board[row][col] = 4
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RETURN:
-                window = 'obstaculo'
+                window = 'rodar_algoritmo_de_ia'
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_BACKSPACE:
+                window = 'passageiro'
     return board, window
+

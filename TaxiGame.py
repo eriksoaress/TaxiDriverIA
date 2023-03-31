@@ -8,6 +8,7 @@ BLUE = (0, 0, 255)
 CIANO = (0, 255, 255)
 BLACK = (0, 0, 0)
 GREEN = (0, 255, 0)
+PURPLE = (128, 0, 128) 
 YELLOW = (255, 255, 0)
 CELL_SIZE = 50
 NUM_COLS = int(input('Digite o numero de colunas desejadas :'))
@@ -29,6 +30,8 @@ while FASE == 0:
         board,window = taxi(board, window)
     elif window == 'passageiro':
         board,window = passageiro(board, window)
+    elif window == 'objetivo':
+        board,window = objetivo(board,window)
 
      # Desenha o tabuleiro na tela
     for row in range(NUM_ROWS):
@@ -39,6 +42,8 @@ while FASE == 0:
                 pygame.draw.rect(screen, YELLOW, (col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE))
             elif board[row][col] == 3:
                 pygame.draw.rect(screen, CIANO, (col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE))
+            elif board[row][col] == 4:
+                pygame.draw.rect(screen, PURPLE, (col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE))
             elif board[row][col] == 5:
                 pygame.draw.rect(screen, GREEN, (col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE))
             else:
