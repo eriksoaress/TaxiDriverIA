@@ -119,8 +119,7 @@ def objetivo(board, window, FASE = 0):
                 board[row][col] = 4
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RETURN:
-                
-                window = 'rodar_algoritmo_de_ia'
+                window = 'animacao'
                 FASE = 1
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_BACKSPACE:
@@ -187,6 +186,8 @@ def animacao(board, n):
 
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RIGHT:
+                if n> len(board) -2:
+                    n = 0
                 n += 1
             elif event.key == pygame.K_LEFT:
                 n -= 1

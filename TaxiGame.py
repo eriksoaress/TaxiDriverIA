@@ -71,8 +71,11 @@ objetivo_lista = getLista(objetivo_array)
 passageiro_lista = getLista(passageiro_array)
 taxi_com_passageiro_lista = getLista(taxi_com_passageiro_array)
 
+if 5 not in board:
+    path = TaxiDriver.main([NUM_ROWS,NUM_COLS], taxi_lista[0], obstaculos_lista, passageiro_lista[0], objetivo_lista[0]).show_path()
+else:
+    path = TaxiDriver.main([NUM_ROWS,NUM_COLS], taxi_com_passageiro_lista[0], obstaculos_lista, taxi_com_passageiro_lista[0], objetivo_lista[0],carro_com_passageiro =True).show_path()
 
-path = TaxiDriver.main([NUM_ROWS,NUM_COLS], taxi_lista[0], obstaculos_lista, passageiro_lista[0], objetivo_lista[0]).show_path()
 
 
 n = 0
@@ -82,7 +85,7 @@ while FASE == 1:
         board,n = animacao(boards, n)
 
 
-     # Desenha o tabuleiro na tela
+     # Desenha o tabuleiro na tela5
     for row in range(NUM_ROWS):
         for col in range(NUM_COLS):
             if board[row][col] == 1:
@@ -91,6 +94,8 @@ while FASE == 1:
                 pygame.draw.rect(screen, YELLOW, (col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE))
             elif board[row][col] == 3:
                 pygame.draw.rect(screen, CIANO, (col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE))
+            elif board[row][col] == 4:
+                pygame.draw.rect(screen, PURPLE, (col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE))
             elif board[row][col] == 5:
                 pygame.draw.rect(screen, GREEN, (col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE))
             else:

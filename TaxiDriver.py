@@ -97,10 +97,10 @@ class Taxi(State):
         else:
             return 1
 
-def main(dimensao, taxi, obstaculos, passageiro, destino):
+def main(dimensao, taxi, obstaculos, passageiro, destino, carro_com_passageiro =False):
 
     # dimensao, taxi, obstaculos, passageiro, destino = cria_exemplo(15 )
-    state = Taxi('',dimensao, taxi, obstaculos, passageiro, destino)
+    state = Taxi('',dimensao, taxi, obstaculos, passageiro, destino, carro_com_passageiro)
     algorithm = AEstrela()
     result = algorithm.search(state, trace=True)
     if result == None:

@@ -20,7 +20,7 @@ def gerar_boards (path, board_inicial):
 
     for i in path_lista :
         novo_board = copy.deepcopy(boards[len(boards)-1])
-        taxi_array = np.where(novo_board == 2)
+        taxi_array = np.where(novo_board == 2) 
         taxi = getLista(taxi_array)[0]
 
         if i == "direita" :
