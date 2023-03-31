@@ -1,5 +1,20 @@
 from aigyminsper.search.SearchAlgorithms import AEstrela
 from aigyminsper.search.Graph import State
+import random
+
+def cria_exemplo(dimensao):
+    taxi = [random.randint(0,dimensao-1), random.randint(0,dimensao-1)]
+    passageiro = [random.randint(0,dimensao-1), random.randint(0,dimensao-1)]
+    destino = [random.randint(0,dimensao-1), random.randint(0,dimensao-1)]
+    obstaculos = []
+    qtd_obstaculos = random.randint(0,dimensao*dimensao)
+    for i in range(qtd_obstaculos):
+        obstaculos.append([random.randint(0,dimensao-1), random.randint(0,dimensao-1)])
+    return [dimensao, dimensao], taxi, obstaculos, passageiro, destino
+
+
+
+
 
 class Taxi(State):
 
@@ -67,11 +82,10 @@ class Taxi(State):
         state = Taxi(self.operator, self.mapa_dimensao, self.taxi, self.obstaculos, self.passageiro, self.destino, self.carro_com_passageiro)
         algorithm = AEstrela()
         result = algorithm.search(state, trace=True)
-        if result != None:
-            print(result.show_path())
-            print(result.g)
-        else:
+        if result == None:
             print('Nao achou solucao')
+            return 'Nao achou solucao'
+        print(result.show_path())
         return result
     
     def env(self):
@@ -84,15 +98,14 @@ class Taxi(State):
             return 1
 
 def main():
-    state = Taxi("", [5,7], [0,0], [[0,3],[1,3],[2,3]], [0,5], [4,0])
+    dimensao, taxi, obstaculos, passageiro, destino = cria_exemplo(15 )
+    state = Taxi("", dimensao, [0,0], [], [0,dimensao[0]-1], [dimensao[0]-1,0])
     algorithm = AEstrela()
     result = algorithm.search(state, trace=True)
-    if result != None:
-        print(result.show_path())
-        print(result.g)
-    else:
+    if result == None:
         print('Nao achou solucao')
         return 'Nao achou solucao'
+    print(result.show_path())
     return result
 
 if __name__ == '__main__':

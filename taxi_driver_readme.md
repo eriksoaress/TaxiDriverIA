@@ -54,17 +54,15 @@ Operações:\
 
 
 
-As operações possíveis são "cima", "direita", "baixo", "esquerda" que movimentam o taxi alterando os valores da sua coordenada de acordo com a operação. Também há as operações "pegar passageiro" que altera o valor de "carro_com_passageiro" para True e a "deixar passageiro" altera o valor de "carro_com_passageiro" para False
-
-
-
 Que algoritmo de busca foi utilizado para resolver este problema considerando que a solução apresentada precisa ser ótima e que deve ser processada na ordem de segundos, no máximo em poucos minutos?
+- Foi utilizado o algoritmo de busca A*, haja vista que precisava considerar o custo das operações para que ele seja ótimo e também gostaríamos de utilizar heurísticas a fim de tornar a execução do algoritmo mais rápida.
 
 
 A equipe fez uso de heurísticas? Se sim, explique as heurísticas utilizadas.
-Sim, a heurística utilizada foi distância de Manhattan entre o taxi e o passageiro, e após pegar o passageiro foi calculada a distância de Manhattan entre o taxi e o destino final.
+Sim, a heurística utilizada foi distância de Manhattan entre o taxi e o passageiro, e após pegar o passageiro foi calculada a distância de Manhattan entre o taxi e o destino final. Foi utilizada essa heurística porque ela simula a distância entre o ponto atual e o de destino e também considerando a forma com que o taxi se movimenta (vertical e horizontal).
 
 Quais são os limites da solução? A solução consegue tratar mapas com que dimensões? Quão complexo pode ser a estrutura de obstáculos?
+
 
 
 Uma explicação de como deve ser usada a implementação com exemplos.

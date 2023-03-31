@@ -47,4 +47,4 @@ def test_impossivel():
     r = state.show_path()
     fim = datetime.now()
     print(fim-inicio)
-    assert r == None
+    assert r == 'Nao achou solucao'
