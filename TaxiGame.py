@@ -2,12 +2,14 @@ from functionsGame import *
 import pygame
 import numpy as np
 import sys
+import TaxiDriver
 
 WHITE = (255, 255, 255)
 BLUE = (0, 0, 255)
 CIANO = (0, 255, 255)
 BLACK = (0, 0, 0)
 GREEN = (0, 255, 0)
+PURPLE = (128, 0, 128) 
 YELLOW = (255, 255, 0)
 CELL_SIZE = 50
 NUM_COLS = int(input('Digite o numero de colunas desejadas :'))
@@ -29,6 +31,8 @@ while FASE == 0:
         board,window = taxi(board, window)
     elif window == 'passageiro':
         board,window = passageiro(board, window)
+    elif window == 'objetivo':
+        board,window, FASE = objetivo(board,window)
 
      # Desenha o tabuleiro na tela
     for row in range(NUM_ROWS):
@@ -39,6 +43,8 @@ while FASE == 0:
                 pygame.draw.rect(screen, YELLOW, (col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE))
             elif board[row][col] == 3:
                 pygame.draw.rect(screen, CIANO, (col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE))
+            elif board[row][col] == 4:
+                pygame.draw.rect(screen, PURPLE, (col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE))
             elif board[row][col] == 5:
                 pygame.draw.rect(screen, GREEN, (col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE))
             else:
@@ -51,9 +57,24 @@ while FASE == 0:
     # Atualiza a tela
     pygame.display.update()
 
-# ROdar taxi driver devolve o path
+# ROdar taxi driver devolve o path ----------------------
 
-path = ''
+obstaculos_array = np.where(board == 1)
+taxi_array = np.where(board == 2)
+passageiro_array = np.where(board == 3)
+objetivo_array = np.where(board == 4)
+taxi_com_passageiro_array = np.where(board == 5)
+
+obstaculos_lista = getLista(obstaculos_array)
+taxi_lista = getLista(taxi_array)
+objetivo_lista = getLista(objetivo_array)
+passageiro_lista = getLista(passageiro_array)
+taxi_com_passageiro_lista = getLista(taxi_com_passageiro_array)
+
+
+path = TaxiDriver.main([NUM_ROWS,NUM_COLS], taxi_lista[0], obstaculos_lista, passageiro_lista[0], objetivo_lista[0]).show_path()
+
+
 n = 0
 boards = gerar_boards(path,board)
 while FASE == 1:

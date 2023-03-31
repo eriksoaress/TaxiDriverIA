@@ -93,13 +93,13 @@ def passageiro(board,window):
                 board[row][col] = 3
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RETURN:
-                window = 'obstaculos'
+                window = 'objetivo'
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_BACKSPACE:
                 window = 'taxi'
     return board, window
 
-def objetivo(board, window):
+def objetivo(board, window, FASE = 0):
     l = [1,2,3,4,5]
     # Lida com eventos do mouse
     for event in pygame.event.get():
@@ -119,8 +119,14 @@ def objetivo(board, window):
                 board[row][col] = 4
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RETURN:
-                window = 'obstaculo'
-    return board, window
+                
+                window = 'rodar_algoritmo_de_ia'
+                FASE = 1
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_BACKSPACE:
+                window = 'passageiro'
+        
+    return board, window, FASE
 
 #################################################################################################################################################
 def getLista(array):
@@ -195,6 +201,7 @@ def animacao(board, n):
 
 
     
+
 
 
 
