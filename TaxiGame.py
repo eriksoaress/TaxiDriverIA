@@ -70,16 +70,17 @@ taxi_lista = getLista(taxi_array)
 objetivo_lista = getLista(objetivo_array)
 passageiro_lista = getLista(passageiro_array)
 taxi_com_passageiro_lista = getLista(taxi_com_passageiro_array)
-
+n_taxi = 0
 if 5 not in board:
     path = TaxiDriver.main([NUM_ROWS,NUM_COLS], taxi_lista[0], obstaculos_lista, passageiro_lista[0], objetivo_lista[0]).show_path()
+    n_taxi = 2
 else:
     path = TaxiDriver.main([NUM_ROWS,NUM_COLS], taxi_com_passageiro_lista[0], obstaculos_lista, taxi_com_passageiro_lista[0], objetivo_lista[0],carro_com_passageiro =True).show_path()
-
+    n_taxi = 5
 
 
 n = 0
-boards = gerar_boards(path,board)
+boards = gerar_boards(path,board, n_taxi)
 while FASE == 1:
     if window == 'animacao':
         board,n = animacao(boards, n)

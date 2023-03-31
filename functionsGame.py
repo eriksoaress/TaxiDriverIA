@@ -136,7 +136,7 @@ def getLista(array):
 
 
 
-def gerar_boards (path, board_inicial):
+def gerar_boards (path, board_inicial, n_taxi):
     path_sem_espaco = path.replace(" ", "")
     path_lista = []
     for etapa in path_sem_espaco.split(';'):
@@ -144,32 +144,38 @@ def gerar_boards (path, board_inicial):
 
 
     boards = [board_inicial]
-
+    print(path_lista)
     for i in path_lista :
         novo_board = copy.deepcopy(boards[len(boards)-1])
-        taxi_array = np.where(novo_board == 2)
+        taxi_array = np.where(novo_board == n_taxi)
         taxi = getLista(taxi_array)[0]
 
         if i == "direita" :
 
             novo_board[taxi[0]][taxi[1]] = 0
-            novo_board[taxi[0]][taxi[1]+1] = 2
+            novo_board[taxi[0]][taxi[1]+1] = n_taxi
             boards.append(novo_board)
         if i == "esquerda" :
 
             novo_board[taxi[0]][taxi[1]] = 0
-            novo_board[taxi[0]][taxi[1]-1] = 2
+            novo_board[taxi[0]][taxi[1]-1] = n_taxi
             boards.append(novo_board)
         if i == "baixo" :
 
             novo_board[taxi[0]][taxi[1]] = 0
-            novo_board[taxi[0]+1][taxi[1]] = 2
+            novo_board[taxi[0]+1][taxi[1]] = n_taxi
             boards.append(novo_board)
         if i == "cima" :
 
             novo_board[taxi[0]][taxi[1]] = 0
-            novo_board[taxi[0]-1][taxi[1]] = 2
+            novo_board[taxi[0]-1][taxi[1]] = n_taxi
             boards.append(novo_board)
+
+        if i == "pegarpassageiro":
+            n_taxi = 5
+            novo_board[taxi[0]][taxi[1]] = n_taxi
+            boards.append(novo_board)
+
 
 
 
@@ -187,9 +193,11 @@ def animacao(board, n):
         elif event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RIGHT:
                 if n> len(board) -2:
-                    n = 0
+                    n = -1
                 n += 1
             elif event.key == pygame.K_LEFT:
+                if n<= -len(board)+1 :
+                    n = 1
                 n -= 1
 
         
