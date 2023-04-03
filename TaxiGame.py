@@ -118,14 +118,15 @@ taxi_com_passageiro_lista = getLista(taxi_com_passageiro_array)
 taxi_no_destino_lista = getLista(taxi_no_destino)
 n_taxi = 0
 if 5 not in board:
-    path = TaxiDriver.main([NUM_ROWS,NUM_COLS], taxi_lista[0], obstaculos_lista, passageiro_lista[0], objetivo_lista[0]).show_path()
-    n_taxi = 2
-else:
     if 6 in board:
         path = TaxiDriver.main([NUM_ROWS,NUM_COLS], taxi_no_destino_lista[0], obstaculos_lista, passageiro_lista[0], taxi_no_destino_lista[0]).show_path()
+        n_taxi = 6
     else:
-        path = TaxiDriver.main([NUM_ROWS,NUM_COLS], taxi_com_passageiro_lista[0], obstaculos_lista, taxi_com_passageiro_lista[0], objetivo_lista[0],carro_com_passageiro =True).show_path()
-        n_taxi = 5
+        path = TaxiDriver.main([NUM_ROWS,NUM_COLS], taxi_lista[0], obstaculos_lista, passageiro_lista[0], objetivo_lista[0]).show_path()
+        n_taxi = 2
+else:
+    path = TaxiDriver.main([NUM_ROWS,NUM_COLS], taxi_com_passageiro_lista[0], obstaculos_lista, taxi_com_passageiro_lista[0], objetivo_lista[0],carro_com_passageiro =True).show_path()
+    n_taxi = 5
 
 
 n = 0
