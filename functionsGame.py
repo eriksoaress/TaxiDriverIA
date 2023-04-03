@@ -175,6 +175,11 @@ def gerar_boards (path, board_inicial, n_taxi):
 
 
     boards = [board_inicial]
+    destino_array = np.where( board_inicial == 4)
+    destino_lista = getLista(destino_array)[0]
+    print(destino_lista)
+
+
     print(path_lista)
     for i in path_lista :
         novo_board = copy.deepcopy(boards[len(boards)-1])
@@ -182,22 +187,19 @@ def gerar_boards (path, board_inicial, n_taxi):
         taxi = getLista(taxi_array)[0]
 
         if i == "direita" :
-            a = novo_board[taxi[0]][taxi[1]]
             novo_board[taxi[0]][taxi[1]] = 0
             novo_board[taxi[0]][taxi[1]+1] = n_taxi
+
             boards.append(novo_board)
         if i == "esquerda" :
-            a= novo_board[taxi[0]][taxi[1]]
             novo_board[taxi[0]][taxi[1]] = 0
             novo_board[taxi[0]][taxi[1]-1] = n_taxi
             boards.append(novo_board)
         if i == "baixo" :
-            a = novo_board[taxi[0]][taxi[1]]
             novo_board[taxi[0]][taxi[1]] = 0 
             novo_board[taxi[0]+1][taxi[1]] = n_taxi
             boards.append(novo_board)
         if i == "cima" :
-            a = novo_board[taxi[0]][taxi[1]]
             novo_board[taxi[0]][taxi[1]] = 0
             novo_board[taxi[0]-1][taxi[1]] = n_taxi
             boards.append(novo_board)
@@ -207,10 +209,9 @@ def gerar_boards (path, board_inicial, n_taxi):
             novo_board[taxi[0]][taxi[1]] = n_taxi
             boards.append(novo_board)
 
+        if taxi == destino_lista :
+            novo_board[taxi[0]][taxi[1]] = 4
 
-
-
-            
     # return [board.tolist() for board in boards]
     return boards
 
