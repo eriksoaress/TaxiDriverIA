@@ -1,5 +1,5 @@
 # TaxiDriverIA
-*Integrantes:*\
+*Autores:*\
 Erik Leonardo Soares de Oliveira\
 Gustavo Antony de Assis\
 Matheus Aguiar de Jesus
@@ -69,7 +69,7 @@ Teste: state = Taxi("", dimensao, [0,0], [], [0,89], [0,0])
 
 
 Uma explicação de como deve ser usada a implementação com exemplos.
-Para utilizar a implementação o usuário deve acessar o arquivo Testando.py e alterar o valor das variáveis da forma que tiver interesse, informando todas as informações relevantes, em seguida executar o arquivo para que seja exibido na tela a solução encontrada.\
+Para utilizar a implementação o usuário deve acessar o arquivo Testando.py e alterar o valor das variáveis da forma que tiver interesse, informando todas as informações relevantes, em seguida executar o arquivo para que seja exibido a solução encontrada.\
 \
 Exemplo:\
 mapa_dimensao = [10,10]\
@@ -79,3 +79,11 @@ passageiro = [5,5]\
 destino = [6,9]\
 carro_com_passageiro = False\
 \
+Também é possível utilizar uma interface mais amigável, através do arquivo TaxiGame. Ao executar tal arquivo será solicitado que você insira as dimensões do mapa que será utilizado. Após isso, uma janela será aberta para que você personalize o mapa da forma que quiser, selecionando o local dos obstáculos, do passageiro, destino, e do taxi clicando nos próprios quadrados do mapa (o limite para essa interface é 30 por 30).\
+Cada um dos elementos da aplicação está representado por uma cor, segue a definição de cada uma abaixo:\
+azul: obstáculos\
+azul claro: passageiro\
+amarelo: táxi\
+roxo: destino\
+rosa: destino + passageiro\
+verde: táxi com passageiro
