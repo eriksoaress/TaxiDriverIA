@@ -140,6 +140,7 @@ while FASE == 1:
     if time%120 == 0:
         if n<= len(boards) -2:
             n += 1
+        time = 0
 
      # Desenha o tabuleiro na tela5
     for row in range(NUM_ROWS):
