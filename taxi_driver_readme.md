@@ -39,7 +39,7 @@ Mostre como ficam representados os estados inicial e final segundo a representa�
 
 Quais as operações sobre os estados? (detalhe como cada operação irá alterar os estados e quais as condições para cada operação ser executada)\
 \
-Operações:\
+Operações:   
 - "cima" - move o taxi uma linha para cima no mapa. (EXEMPLO taxi:[1,1] -> taxi:[0,1])
 
 - "baixo" - move o taxi uma linha para baixo no mapa. (EXEMPLO taxi:[1,1] -> taxi:[2,1])

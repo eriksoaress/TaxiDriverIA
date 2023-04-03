@@ -81,15 +81,13 @@ class Taxi(State):
     def show_path(self):
         state = Taxi(self.operator, self.mapa_dimensao, self.taxi, self.obstaculos, self.passageiro, self.destino, self.carro_com_passageiro)
         algorithm = AEstrela()
-        result = algorithm.search(state, trace=True)
+        result = algorithm.search(state)
         if result == None:
-            print('Nao achou solucao')
             return 'Nao achou solucao'
-        print(result.show_path())
         return result
     
     def env(self):
-        return str(self.operator) + str(self.taxi) + str(self.carro_com_passageiro) + str(self.passageiro)
+        return str(self.operator) + str(self.taxi) + str(self.carro_com_passageiro)
     
     def cost(self):
         if "passageiro" in self.operator:
@@ -97,15 +95,12 @@ class Taxi(State):
         else:
             return 1
 
-def main():
-    dimensao, taxi, obstaculos, passageiro, destino = cria_exemplo(15 )
-    state = Taxi("", dimensao, [0,0], [], [dimensao[0]-1,dimensao[0]-1], [0,0])
+def main(dimensao, taxi, obstaculos, passageiro, destino, carro_com_passageiro=False):
+    state = Taxi('',dimensao, taxi, obstaculos, passageiro, destino, carro_com_passageiro)
     algorithm = AEstrela()
-    result = algorithm.search(state, trace=True)
+    result = algorithm.search(state)
     if result == None:
-        print('Nao achou solucao')
         return 'Nao achou solucao'
-    print(result.show_path())
     return result
 
 if __name__ == '__main__':
