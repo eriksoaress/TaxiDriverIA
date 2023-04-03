@@ -130,11 +130,17 @@ else:
 
 
 n = 0
+time = 0
 boards = gerar_boards(path,board, n_taxi)
 while FASE == 1:
     if window == 'animacao':
+        
         board,n = animacao(boards, n)
-
+    time += 1
+    if time%120 == 0:
+        if n> len(boards) -2:
+            n = -1
+        n += 1
 
      # Desenha o tabuleiro na tela5
     for row in range(NUM_ROWS):
