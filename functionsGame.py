@@ -6,7 +6,7 @@ import copy
 
 def obstaculos(board, window,CELL_SIZE,button_rects,CDIMENSOES):
     l_buttons = ["obstaculos", "taxi", "passageiro", "destino", "começar"]
-    l = [2,3,4,5]
+    l = [2,3,4,5,6]
     # Lida com eventos do mouse
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -50,7 +50,7 @@ def click_botoes(button_rects, l_buttons, window,pos_event):
 
 def taxi(board, window, CELL_SIZE, button_rects,CDIMENSOES):
     l_buttons = ["obstaculos", "taxi", "passageiro", "destino", "começar"]
-    l = [1]
+    l = [1,6]
     # Lida com eventos do mouse
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -92,7 +92,7 @@ def taxi(board, window, CELL_SIZE, button_rects,CDIMENSOES):
 
 def passageiro(board,window, CELL_SIZE,button_rects,CDIMENSOES):
     l_buttons = ["obstaculos", "taxi", "passageiro", "destino", "começar"]
-    l = [1,4]
+    l = [1,4,6]
     # Lida com eventos do mouse
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -126,7 +126,7 @@ def passageiro(board,window, CELL_SIZE,button_rects,CDIMENSOES):
 
 def objetivo(board, window, CELL_SIZE, button_rects,CDIMENSOES,FASE = 0):
     l_buttons = ["obstaculos", "taxi", "passageiro", "destino", "começar"]
-    l = [1,2,3,4,5]
+    l = [1,2,3,4,5,6]
     # Lida com eventos do mouse
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -168,6 +168,7 @@ def getLista(array):
 
 
 def gerar_boards (path, board_inicial, n_taxi):
+    change = False
     path_sem_espaco = path.replace(" ", "")
     path_lista = []
     for etapa in path_sem_espaco.split(';'):
@@ -175,7 +176,10 @@ def gerar_boards (path, board_inicial, n_taxi):
 
 
     boards = [board_inicial]
-    destino_array = np.where( board_inicial == 4)
+    if n_taxi != 6:
+        destino_array = np.where( board_inicial == 4)
+    else:
+        destino_array = np.where( board_inicial == 6)
     destino_lista = getLista(destino_array)[0]
     print(destino_lista)
 
@@ -185,6 +189,8 @@ def gerar_boards (path, board_inicial, n_taxi):
         novo_board = copy.deepcopy(boards[len(boards)-1])
         taxi_array = np.where(novo_board == n_taxi)
         taxi = getLista(taxi_array)[0]
+        if change == True:
+            n_taxi = 2
 
         if i == "direita" :
             novo_board[taxi[0]][taxi[1]] = 0
@@ -211,7 +217,7 @@ def gerar_boards (path, board_inicial, n_taxi):
 
         if taxi == destino_lista :
             novo_board[taxi[0]][taxi[1]] = 4
-
+            change = True
     # return [board.tolist() for board in boards]
     return boards
 

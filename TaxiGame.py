@@ -140,6 +140,8 @@ while FASE == 1:
     if time%120 == 0:
         if n<= len(boards) -2:
             n += 1
+        else:
+            sys.exit()
         time = 0
 
      # Desenha o tabuleiro na tela5
@@ -170,4 +172,5 @@ while FASE == 1:
         pygame.draw.line(screen, color=BLACK, start_pos=(0, CELL_SIZE*i), end_pos= (WINDOW_SIZE[0], CELL_SIZE*i))
     # Atualiza a tela
     pygame.display.update()
+
 
