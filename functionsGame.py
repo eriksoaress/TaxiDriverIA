@@ -5,7 +5,7 @@ import copy
 
 
 def obstaculos(board, window,CELL_SIZE,button_rects,CDIMENSOES):
-    l_buttons = ["obstaculos", "taxi", "passageiro", "destino", "start"]
+    l_buttons = ["obstaculos", "taxi", "passageiro", "destino", "começar"]
     l = [2,3,4,5]
     # Lida com eventos do mouse
     for event in pygame.event.get():
@@ -42,14 +42,14 @@ def click_botoes(button_rects, l_buttons, window,pos_event):
                 window = "passageiro"
             elif botao == "destino":
                 window = "objetivo"
-            elif botao == "start":
+            elif botao == "começar":
                 window = "animacao"
             print("Botão", l_buttons[i], "clicado")
             print(window)
     return window
 
 def taxi(board, window, CELL_SIZE, button_rects,CDIMENSOES):
-    l_buttons = ["obstaculos", "taxi", "passageiro", "destino", "start"]
+    l_buttons = ["obstaculos", "taxi", "passageiro", "destino", "começar"]
     l = [1]
     # Lida com eventos do mouse
     for event in pygame.event.get():
@@ -91,7 +91,7 @@ def taxi(board, window, CELL_SIZE, button_rects,CDIMENSOES):
     return board,window
 
 def passageiro(board,window, CELL_SIZE,button_rects,CDIMENSOES):
-    l_buttons = ["obstaculos", "taxi", "passageiro", "destino", "start"]
+    l_buttons = ["obstaculos", "taxi", "passageiro", "destino", "começar"]
     l = [1,4]
     # Lida com eventos do mouse
     for event in pygame.event.get():
@@ -125,7 +125,7 @@ def passageiro(board,window, CELL_SIZE,button_rects,CDIMENSOES):
     return board, window
 
 def objetivo(board, window, CELL_SIZE, button_rects,CDIMENSOES,FASE = 0):
-    l_buttons = ["obstaculos", "taxi", "passageiro", "destino", "start"]
+    l_buttons = ["obstaculos", "taxi", "passageiro", "destino", "começar"]
     l = [1,2,3,4,5]
     # Lida com eventos do mouse
     for event in pygame.event.get():

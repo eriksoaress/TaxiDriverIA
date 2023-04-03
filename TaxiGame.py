@@ -43,7 +43,7 @@ l_colors = [BLUE,YELLOW,CIANO,PURPLE,BLACK]
 l_colors_text = [WHITE,BLACK,BLACK,WHITE,WHITE]
 button_rects = []
 button_dict = {}
-for i, button_text in enumerate(["obstaculos", "taxi", "passageiro", "destino", "start"]):
+for i, button_text in enumerate(["obstaculos", "taxi", "passageiro", "destino", "começar"]):
     button_rect = pygame.draw.rect(screen, l_colors_text[i], (850, 150 + i * 100, 200, 50))
     button_surface = button_font.render(button_text, True, l_colors_text[i])
     button_rect_center = button_surface.get_rect(center=button_rect.center)
