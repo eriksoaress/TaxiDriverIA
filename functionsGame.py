@@ -3,10 +3,10 @@ import sys
 import numpy as np
 import copy
 
-CELL_SIZE = 50
 
-def obstaculos(board, window):
-    l = [2,3,4,5]
+def obstaculos(board, window,CELL_SIZE,button_rects,CDIMENSOES):
+    l_buttons = ["obstaculos", "taxi", "passageiro", "destino", "começar"]
+    l = [2,3,4,5,6]
     # Lida com eventos do mouse
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -16,20 +16,41 @@ def obstaculos(board, window):
             # Obtém a posição do clique do mouse
             x, y = event.pos
             # Calcula a posição do quadrado clicado
-            col = x // CELL_SIZE
-            row = y // CELL_SIZE
-            # Pinta o quadrado clicado
-            if board[row][col] not in l and board[row][col] == 1:
-                board[row][col] = 0
-            elif board[row][col] not in l and board[row][col] == 0:
-                board[row][col] = 1
-        elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_RETURN:
-                window = 'taxi'
+            if (x>0 and x <CDIMENSOES[0]) and (y>0 and y<CDIMENSOES[1]):
+                col = x // CELL_SIZE
+                row = y // CELL_SIZE
+                # Pinta o quadrado clicado
+                if board[row][col] not in l and board[row][col] == 1:
+                    board[row][col] = 0
+                elif board[row][col] not in l and board[row][col] == 0:
+                    board[row][col] = 1
+            # Verificar se o clique foi em um botão
+            elif (x<1100 and x > 800):
+                window = click_botoes(button_rects,l_buttons,window,event.pos)
     return board,window
 
-def taxi(board, window):
-    l = [1,4]
+
+def click_botoes(button_rects, l_buttons, window,pos_event):
+    for i, button_rect in enumerate(button_rects):
+        if button_rect.collidepoint(pos_event):
+            botao = l_buttons[i]
+            if botao == "obstaculos":
+                window = "obstaculos"
+            elif botao == "taxi":
+                window = "taxi"
+            elif botao == "passageiro":
+                window = "passageiro"
+            elif botao == "destino":
+                window = "objetivo"
+            elif botao == "começar":
+                window = "animacao"
+            print("Botão", l_buttons[i], "clicado")
+            print(window)
+    return window
+
+def taxi(board, window, CELL_SIZE, button_rects,CDIMENSOES):
+    l_buttons = ["obstaculos", "taxi", "passageiro", "destino", "começar"]
+    l = [1,6]
     # Lida com eventos do mouse
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -38,33 +59,40 @@ def taxi(board, window):
         elif event.type == pygame.MOUSEBUTTONDOWN:
             # Obtém a posição do clique do mouse
             x, y = event.pos
-            # Calcula a posição do quadrado clicado
-            col = x // CELL_SIZE
-            row = y // CELL_SIZE
-            # Pinta o quadrado clicado
-            if 5 in board:
-                old_cord = np.where(board == 5)
-                if board[old_cord][0] != board[row,col] and board[row,col] not in l:
-                    board[old_cord] = 3
+            if (x>0 and x <CDIMENSOES[0]) and (y>0 and y<CDIMENSOES[1]):
+                # Calcula a posição do quadrado clicado
+                col = x // CELL_SIZE
+                row = y // CELL_SIZE
+                # Pinta o quadrado clicado
+                if 5 in board:
+                    old_cord = np.where(board == 5)
+                    if board[old_cord][0] != board[row,col] and board[row,col] not in l:
+                        board[old_cord] = 3
+                        board[row][col] = 2
+                elif 6 in board:
+                    old_cord = np.where(board == 6)
+                    if board[old_cord][0] != board[row,col] and board[row,col] != 1:
+                        board[old_cord] = 4
+                        board[row][col] = 2
+                elif board[row][col] == 3:
+                    old_cord = np.where(board == 2)
+                    board[old_cord] = 0
+                    board[row][col] = 5
+                elif board[row][col] == 4:
+                    old_cord = np.where(board == 2)
+                    board[old_cord] = 0
+                    board[row][col] = 6
+                elif board[row][col] != 1:
+                    old_cord = np.where(board == 2)
+                    board[old_cord] = 0
                     board[row][col] = 2
-            elif board[row][col] == 3:
-                old_cord = np.where(board == 2)
-                board[old_cord] = 0
-                board[row][col] = 5
-            elif board[row][col] != 1:
-                old_cord = np.where(board == 2)
-                board[old_cord] = 0
-                board[row][col] = 2
-        elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_RETURN:
-                window = 'passageiro'
-        elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_BACKSPACE:
-                window = 'obstaculos'
+            elif (x<1100 and x > 800):
+                window = click_botoes(button_rects,l_buttons,window,event.pos)
     return board,window
 
-def passageiro(board,window):
-    l = [1,4]
+def passageiro(board,window, CELL_SIZE,button_rects,CDIMENSOES):
+    l_buttons = ["obstaculos", "taxi", "passageiro", "destino", "começar"]
+    l = [1,4,6]
     # Lida com eventos do mouse
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -73,34 +101,32 @@ def passageiro(board,window):
         elif event.type == pygame.MOUSEBUTTONDOWN:
             # Obtém a posição do clique do mouse
             x, y = event.pos
-            # Calcula a posição do quadrado clicado
-            col = x // CELL_SIZE
-            row = y // CELL_SIZE
-            # Pinta o quadrado clicado
-            if 5 in board:
-                old_cord = np.where(board == 5)
-                if board[old_cord][0] != board[row,col] and board[row,col] not in l:
-                    board[old_cord] = 2
+            if (x>0 and x <CDIMENSOES[0]) and (y>0 and y<CDIMENSOES[1]):
+                # Calcula a posição do quadrado clicado
+                col = x // CELL_SIZE
+                row = y // CELL_SIZE
+                # Pinta o quadrado clicado
+                if 5 in board:
+                    old_cord = np.where(board == 5)
+                    if board[old_cord][0] != board[row,col] and board[row,col] not in l:
+                        board[old_cord] = 2
+                        board[row][col] = 3
+                #Caso tente colocar o passsageiro junto do taxi
+                elif board[row][col] == 2:
+                    old_cord = np.where(board == 3)
+                    board[old_cord] = 0
+                    board[row][col] = 5
+                elif board[row][col] not in l:
+                    old_cord = np.where(board == 3)
+                    board[old_cord] = 0
                     board[row][col] = 3
-            #Caso tente colocar o passsageiro junto do taxi
-            elif board[row][col] == 2:
-                old_cord = np.where(board == 3)
-                board[old_cord] = 0
-                board[row][col] = 5
-            elif board[row][col] != 1:
-                old_cord = np.where(board == 3)
-                board[old_cord] = 0
-                board[row][col] = 3
-        elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_RETURN:
-                window = 'objetivo'
-        elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_BACKSPACE:
-                window = 'taxi'
+            elif (x<1100 and x > 800):
+                window = click_botoes(button_rects,l_buttons,window,event.pos)
     return board, window
 
-def objetivo(board, window, FASE = 0):
-    l = [1,2,3,4,5]
+def objetivo(board, window, CELL_SIZE, button_rects,CDIMENSOES,FASE = 0):
+    l_buttons = ["obstaculos", "taxi", "passageiro", "destino", "começar"]
+    l = [1,2,3,4,5,6]
     # Lida com eventos do mouse
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -109,21 +135,26 @@ def objetivo(board, window, FASE = 0):
         elif event.type == pygame.MOUSEBUTTONDOWN:
             # Obtém a posição do clique do mouse
             x, y = event.pos
-            # Calcula a posição do quadrado clicado
-            col = x // CELL_SIZE
-            row = y // CELL_SIZE
-            # Pinta o quadrado clicado
-            if board[row][col] not in l:
-                old_cord = np.where(board == 4)
-                board[old_cord] = 0
-                board[row][col] = 4
-        elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_RETURN:
-                window = 'animacao'
-                FASE = 1
-        elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_BACKSPACE:
-                window = 'passageiro'
+            if (x>0 and x <CDIMENSOES[0]) and (y>0 and y<CDIMENSOES[1]):
+                # Calcula a posição do quadrado clicado
+                col = x // CELL_SIZE
+                row = y // CELL_SIZE
+                # Pinta o quadrado clicado
+                if 6 in board:
+                    old_cord = np.where(board == 6)
+                    if board[old_cord][0] != board[row,col] and board[row,col] != 1:
+                        board[old_cord] = 2
+                        board[row][col] = 4
+                elif board[row][col] == 2:
+                    old_cord = np.where(board == 4)
+                    board[old_cord] = 0
+                    board[row][col] = 6
+                elif board[row][col] not in l:
+                    old_cord = np.where(board == 4)
+                    board[old_cord] = 0
+                    board[row][col] = 4
+            elif (x<1100 and x > 800):
+                window = click_botoes(button_rects,l_buttons,window,event.pos)
         
     return board, window, FASE
 
@@ -137,6 +168,7 @@ def getLista(array):
 
 
 def gerar_boards (path, board_inicial, n_taxi):
+    change = False
     path_sem_espaco = path.replace(" ", "")
     path_lista = []
     for etapa in path_sem_espaco.split(';'):
@@ -144,29 +176,36 @@ def gerar_boards (path, board_inicial, n_taxi):
 
 
     boards = [board_inicial]
+    if n_taxi != 6:
+        destino_array = np.where( board_inicial == 4)
+    else:
+        destino_array = np.where( board_inicial == 6)
+    destino_lista = getLista(destino_array)[0]
+    print(destino_lista)
+
+
     print(path_lista)
     for i in path_lista :
         novo_board = copy.deepcopy(boards[len(boards)-1])
         taxi_array = np.where(novo_board == n_taxi)
         taxi = getLista(taxi_array)[0]
+        if change == True:
+            n_taxi = 2
 
         if i == "direita" :
-
             novo_board[taxi[0]][taxi[1]] = 0
             novo_board[taxi[0]][taxi[1]+1] = n_taxi
+
             boards.append(novo_board)
         if i == "esquerda" :
-
             novo_board[taxi[0]][taxi[1]] = 0
             novo_board[taxi[0]][taxi[1]-1] = n_taxi
             boards.append(novo_board)
         if i == "baixo" :
-
-            novo_board[taxi[0]][taxi[1]] = 0
+            novo_board[taxi[0]][taxi[1]] = 0 
             novo_board[taxi[0]+1][taxi[1]] = n_taxi
             boards.append(novo_board)
         if i == "cima" :
-
             novo_board[taxi[0]][taxi[1]] = 0
             novo_board[taxi[0]-1][taxi[1]] = n_taxi
             boards.append(novo_board)
@@ -176,10 +215,9 @@ def gerar_boards (path, board_inicial, n_taxi):
             novo_board[taxi[0]][taxi[1]] = n_taxi
             boards.append(novo_board)
 
-
-
-
-            
+        if taxi == destino_lista :
+            novo_board[taxi[0]][taxi[1]] = 4
+            change = True
     # return [board.tolist() for board in boards]
     return boards
 
