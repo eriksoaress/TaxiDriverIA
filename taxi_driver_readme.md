@@ -16,6 +16,7 @@ O que é relevante representar nos estados do mundo? Como os estados são estrut
 
 - locais dos obstáculos que é estrurado na forma de uma lista de listas [["linha_obst1","coluna_obst1"], ["linha_obst2","coluna_obst2"], ["linha_obst3","coluna_obst3"]]
 
+- por fim, se o passageiro já está ou não dentro do taxi, representado por um valor booleano True ou False.
 
 
 Mostre como ficam representados os estados inicial e final segundo a representação adotada.
@@ -63,8 +64,18 @@ A equipe fez uso de heurísticas? Se sim, explique as heurísticas utilizadas.
 
 
 Quais são os limites da solução? A solução consegue tratar mapas com que dimensões? Quão complexo pode ser a estrutura de obstáculos?
-- O tempo de execução do algoritmo pode variar para cada máquina que está executando, a depender de seu processador. Testamos a solução para mapas sem obstáculos e pegando o pior cenário possível (nesse caso o taxi e o destino estariam em um vértice do mapa enquanto que o passageiro estaria no vértice oposto), dessa forma executando para um mapa de dimensão 15 por 15 a execução levou cerca de 5 minutos. Os obstáculos não foram considerados nesses testes pois eles não influenciam no desempenho, podendo então apresentar qualquer complexidade, o único impacto será em relação a ter ou não uma solução possível.
-Teste: state = Taxi("", dimensao, [0,0], [], [0,14], [14,0])
+- O tempo de execução do algoritmo pode variar para cada máquina que está executando, a depender de seu processador. Testamos a solução para mapas sem obstáculos e pegando o pior cenário possível (nesse caso o taxi e o destino estariam em um vértice do mapa enquanto que o passageiro estaria no vértice oposto), dessa forma executando para um mapa de dimensão 90 por 90 a execução ultrapassou o tempo de 5 minutos, demonstrando ser inviável para dimensões maiores que essa. Os obstáculos não foram considerados nesses testes pois eles não influenciam no desempenho, podendo então apresentar qualquer complexidade, o único impacto será em relação a ter ou não uma solução possível.
+Teste: state = Taxi("", dimensao, [0,0], [], [0,89], [0,0])
 
 
 Uma explicação de como deve ser usada a implementação com exemplos.
+Para utilizar a implementação o usuário deve acessar o arquivo Testando.py e alterar o valor das variáveis da forma que tiver interesse, informando todas as informações relevantes, em seguida executar o arquivo para que seja exibido na tela a solução encontrada.\
+\
+Exemplo:\
+mapa_dimensao = [10,10]\
+taxi = [0,0]\
+obstaculos = [[2,2],[3,3]]\
+passageiro = [5,5]\
+destino = [6,9]\
+carro_com_passageiro = False\
+\
