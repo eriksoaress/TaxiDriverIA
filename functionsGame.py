@@ -191,6 +191,7 @@ def gerar_boards (path, board_inicial, n_taxi):
         taxi = getLista(taxi_array)[0]
         if change == True:
             n_taxi = 2
+            change = False
 
         if i == "direita" :
             novo_board[taxi[0]][taxi[1]] = 0
