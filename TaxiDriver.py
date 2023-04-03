@@ -89,7 +89,7 @@ class Taxi(State):
         return result
     
     def env(self):
-        return str(self.operator) + str(self.taxi) + str(self.carro_com_passageiro) + str(self.passageiro)
+        return str(self.operator) + str(self.taxi) + str(self.carro_com_passageiro)
     
     def cost(self):
         if "passageiro" in self.operator:
@@ -97,10 +97,9 @@ class Taxi(State):
         else:
             return 1
 
-def main(dimensao, taxi, obstaculos, passageiro, destino, carro_com_passageiro =False):
-
-    # dimensao, taxi, obstaculos, passageiro, destino = cria_exemplo(15 )
-    state = Taxi('',dimensao, taxi, obstaculos, passageiro, destino, carro_com_passageiro)
+def main():
+    dimensao, taxi, obstaculos, passageiro, destino = cria_exemplo(10)
+    state = Taxi("", dimensao, [0,0], [], [dimensao[0]-1,dimensao[0]-1], [0,0])
     algorithm = AEstrela()
     result = algorithm.search(state, trace=True)
     if result == None:
