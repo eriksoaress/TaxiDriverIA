@@ -13,8 +13,12 @@ BLACK = (0, 0, 0)
 GREEN = (60,179,113)
 PURPLE = (139,0,139)
 YELLOW = (255, 255, 0)
-NUM_COLS = int(input('Digite o numero de colunas desejadas :'))
-NUM_ROWS = int(input('Digite o numero de linhas desejadas :'))
+NUM_COLS = 0
+NUM_ROWS = 0
+while NUM_COLS not in range(1,31):
+    NUM_COLS = int(input('Digite o numero de colunas desejadas (1 - 30):'))
+while NUM_ROWS not in range(1,31):
+    NUM_ROWS = int(input('Digite o numero de linhas desejadas (1 - 30):'))
 if NUM_COLS > NUM_ROWS:
     CELL_SIZE = int(800/NUM_COLS)
 else:
