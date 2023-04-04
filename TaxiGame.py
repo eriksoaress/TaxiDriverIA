@@ -55,7 +55,6 @@ for i, button_text in enumerate(["obstaculos", "taxi", "passageiro", "destino", 
     button_dict[i] = [button_rect_center,button_surface,(850, 150 + i * 100, 200, 50)]
     # Posicionar a barra lateral na lateral direita da tela
 
-
 while FASE == 0:
 
     side_bar.fill(WHITE)
@@ -71,8 +70,6 @@ while FASE == 0:
         board,window, FASE = objetivo(board,window,CELL_SIZE,button_rects,CDIMENSOES)
     elif window == 'animacao':
         FASE = 1
-
-    
 
      # Desenha o tabuleiro na tela
     for row in range(NUM_ROWS):
@@ -100,7 +97,6 @@ while FASE == 0:
     for i, button_prop in button_dict.items():
         button_rect = pygame.draw.rect(screen, l_colors[i], button_prop[2])
         screen.blit(button_prop[1], button_prop[0])
-        
     
     # Atualiza a tela
     pygame.display.update()
@@ -129,7 +125,6 @@ elif (len (objetivo_lista) == 0) and (len (taxi_no_destino_lista) == 0):
 
 else :
 
-
     n_taxi = 0
     if 5 not in board:
         if 6 in board:
@@ -141,7 +136,6 @@ else :
     else:
         path = TaxiDriver.main([NUM_ROWS,NUM_COLS], taxi_com_passageiro_lista[0], obstaculos_lista, taxi_com_passageiro_lista[0], objetivo_lista[0],carro_com_passageiro =True).show_path()
         n_taxi = 5
-
 
     n = 0
     time = 0
