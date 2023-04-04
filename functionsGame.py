@@ -229,18 +229,6 @@ def animacao(board, n):
             pygame.quit()
             sys.exit()
 
-        elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_RIGHT:
-                if n> len(board) -2:
-                    n = -1
-                n += 1
-            elif event.key == pygame.K_LEFT:
-                if n<= -len(board)+1 :
-                    n = 1
-                n -= 1
-
-        
-    
     board = board[n]
     return board, n
 
