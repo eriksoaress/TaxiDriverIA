@@ -120,61 +120,71 @@ objetivo_lista = getLista(objetivo_array)
 passageiro_lista = getLista(passageiro_array)
 taxi_com_passageiro_lista = getLista(taxi_com_passageiro_array)
 taxi_no_destino_lista = getLista(taxi_no_destino)
-n_taxi = 0
-if 5 not in board:
-    if 6 in board:
-        path = TaxiDriver.main([NUM_ROWS,NUM_COLS], taxi_no_destino_lista[0], obstaculos_lista, passageiro_lista[0], taxi_no_destino_lista[0]).show_path()
-        n_taxi = 6
-    else:
-        path = TaxiDriver.main([NUM_ROWS,NUM_COLS], taxi_lista[0], obstaculos_lista, passageiro_lista[0], objetivo_lista[0]).show_path()
-        n_taxi = 2
-else:
-    path = TaxiDriver.main([NUM_ROWS,NUM_COLS], taxi_com_passageiro_lista[0], obstaculos_lista, taxi_com_passageiro_lista[0], objetivo_lista[0],carro_com_passageiro =True).show_path()
-    n_taxi = 5
+
+if (len(taxi_com_passageiro_lista) == 0) and (len(passageiro_lista) == 0) :
+    print ("Não é possível realizar a viagem sem um dos seguintes itens : passageiro, destino ou taxi")
+
+elif (len (objetivo_lista) == 0) and (len (taxi_no_destino_lista) == 0):
+    print ("Não é possível realizar a viagem sem um dos seguintes itens : passageiro, destino ou taxi")
+
+else :
 
 
-n = 0
-time = 0
-boards = gerar_boards(path,board, n_taxi)
-while FASE == 1:
-    if window == 'animacao':
-        
-        board,n = animacao(boards, n)
-    time += 1
-    if time%120 == 0:
-        if n<= len(boards) -2:
-            n += 1
+    n_taxi = 0
+    if 5 not in board:
+        if 6 in board:
+            path = TaxiDriver.main([NUM_ROWS,NUM_COLS], taxi_no_destino_lista[0], obstaculos_lista, passageiro_lista[0], taxi_no_destino_lista[0]).show_path()
+            n_taxi = 6
         else:
-            sys.exit()
-        time = 0
+            path = TaxiDriver.main([NUM_ROWS,NUM_COLS], taxi_lista[0], obstaculos_lista, passageiro_lista[0], objetivo_lista[0]).show_path()
+            n_taxi = 2
+    else:
+        path = TaxiDriver.main([NUM_ROWS,NUM_COLS], taxi_com_passageiro_lista[0], obstaculos_lista, taxi_com_passageiro_lista[0], objetivo_lista[0],carro_com_passageiro =True).show_path()
+        n_taxi = 5
 
-     # Desenha o tabuleiro na tela5
-    for row in range(NUM_ROWS):
-        for col in range(NUM_COLS):
-            if board[row][col] == 1:
-                pygame.draw.rect(screen, BLUE, (col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE))
-            elif board[row][col] == 2:
-                pygame.draw.rect(screen, YELLOW, (col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE))
-            elif board[row][col] == 3:
-                pygame.draw.rect(screen, CIANO, (col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE))
-            elif board[row][col] == 4:
-                pygame.draw.rect(screen, PURPLE, (col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE))
-            elif board[row][col] == 5:
-                pygame.draw.rect(screen, GREEN, (col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE))
-            elif board[row][col] == 6:
-                pygame.draw.rect(screen, PINK, (col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE))
+
+    n = 0
+    time = 0
+    boards = gerar_boards(path,board, n_taxi)
+    while FASE == 1:
+        if window == 'animacao':
+            
+            board,n = animacao(boards, n)
+        time += 1
+        if time%120 == 0:
+            if n<= len(boards) -2:
+                n += 1
             else:
-                pygame.draw.rect(screen, WHITE, (col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE))             
+                sys.exit()
+            time = 0
 
-    # for i in range(1,NUM_COLS):
-    #     pygame.draw.line(screen, color=BLACK, start_pos=(WINDOW_SIZE[0]//NUM_COLS*i,0), end_pos= (WINDOW_SIZE[0]//NUM_COLS*i,WINDOW_SIZE[1]))
-    # for i in range(1,NUM_ROWS):
-    #     pygame.draw.line(screen, color=BLACK, start_pos=(0, WINDOW_SIZE[1]//NUM_ROWS*i), end_pos= (WINDOW_SIZE[0], WINDOW_SIZE[1]//NUM_ROWS*i))
-    for i in range(1,NUM_COLS+1):
-        pygame.draw.line(screen, color=BLACK, start_pos=(CELL_SIZE*i,0), end_pos= (CELL_SIZE*i,WINDOW_SIZE[1]))
-    for i in range(0,NUM_ROWS):
-        pygame.draw.line(screen, color=BLACK, start_pos=(0, CELL_SIZE*i), end_pos= (WINDOW_SIZE[0], CELL_SIZE*i))
-    # Atualiza a tela
-    pygame.display.update()
+        # Desenha o tabuleiro na tela5
+        for row in range(NUM_ROWS):
+            for col in range(NUM_COLS):
+                if board[row][col] == 1:
+                    pygame.draw.rect(screen, BLUE, (col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE))
+                elif board[row][col] == 2:
+                    pygame.draw.rect(screen, YELLOW, (col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE))
+                elif board[row][col] == 3:
+                    pygame.draw.rect(screen, CIANO, (col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE))
+                elif board[row][col] == 4:
+                    pygame.draw.rect(screen, PURPLE, (col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE))
+                elif board[row][col] == 5:
+                    pygame.draw.rect(screen, GREEN, (col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE))
+                elif board[row][col] == 6:
+                    pygame.draw.rect(screen, PINK, (col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE))
+                else:
+                    pygame.draw.rect(screen, WHITE, (col * CELL_SIZE, row * CELL_SIZE, CELL_SIZE, CELL_SIZE))             
+
+        # for i in range(1,NUM_COLS):
+        #     pygame.draw.line(screen, color=BLACK, start_pos=(WINDOW_SIZE[0]//NUM_COLS*i,0), end_pos= (WINDOW_SIZE[0]//NUM_COLS*i,WINDOW_SIZE[1]))
+        # for i in range(1,NUM_ROWS):
+        #     pygame.draw.line(screen, color=BLACK, start_pos=(0, WINDOW_SIZE[1]//NUM_ROWS*i), end_pos= (WINDOW_SIZE[0], WINDOW_SIZE[1]//NUM_ROWS*i))
+        for i in range(1,NUM_COLS+1):
+            pygame.draw.line(screen, color=BLACK, start_pos=(CELL_SIZE*i,0), end_pos= (CELL_SIZE*i,WINDOW_SIZE[1]))
+        for i in range(0,NUM_ROWS):
+            pygame.draw.line(screen, color=BLACK, start_pos=(0, CELL_SIZE*i), end_pos= (WINDOW_SIZE[0], CELL_SIZE*i))
+        # Atualiza a tela
+        pygame.display.update()
 
 
